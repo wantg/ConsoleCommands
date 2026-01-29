@@ -33,7 +33,7 @@ void FConsoleCommandsModule::StartupModule()
 	UToolMenus::RegisterStartupCallback(FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &FConsoleCommandsModule::RegisterMenus));
 	
 	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(ConsoleCommandsTabName, FOnSpawnTab::CreateRaw(this, &FConsoleCommandsModule::OnSpawnPluginTab))
-		.SetDisplayName(LOCTEXT("FConsoleCommandsTabTitle", "ConsoleCommands"))
+		.SetDisplayName(LOCTEXT("FConsoleCommandsTabTitle", "Console Commands"))
 		.SetMenuType(ETabSpawnerMenuType::Hidden);
 }
 
@@ -56,7 +56,7 @@ void FConsoleCommandsModule::ShutdownModule()
 TSharedRef<SDockTab> FConsoleCommandsModule::OnSpawnPluginTab(const FSpawnTabArgs& SpawnTabArgs)
 {
 	UWorld* World = GEditor->GetEditorWorldContext().World();
-	UUserWidget* Widget = CreateWidget<UUserWidget>(World, LoadClass<UUserWidget>(nullptr, TEXT("/ConsoleCommands/UW_ConsoleCommands.UW_ConsoleCommands_C")));
+	UUserWidget* Widget = CreateWidget<UUserWidget>(World, LoadClass<UUserWidget>(nullptr, TEXT("/ConsoleCommands/EUW_ConsoleCommands.EUW_ConsoleCommands_C")));
 	FText WidgetText = FText::Format(
 		LOCTEXT("WindowWidgetText", "Add code to {0} in {1} to override this window's contents"),
 		FText::FromString(TEXT("FConsoleCommandsModule::OnSpawnPluginTab")),

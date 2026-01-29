@@ -27,6 +27,7 @@ public class ConsoleCommands : ModuleRules
 			{
 				"Core",
 				"UMG",
+				"Blutility",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
