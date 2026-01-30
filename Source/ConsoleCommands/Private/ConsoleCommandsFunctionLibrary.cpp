@@ -1,5 +1,6 @@
 #include "ConsoleCommandsFunctionLibrary.h"
 #include "EUW_Modal.h"
+#include "DesktopPlatformModule.h"
 
 void UConsoleCommandsFunctionLibrary::ShowModalDialog(FString Title, TSubclassOf<UEUW_Modal> WidgetClass, FVector2D Size, UUserWidget* Instigator) {
     UWorld* World     = GEditor->GetEditorWorldContext().World();
@@ -13,4 +14,25 @@ void UConsoleCommandsFunctionLibrary::ShowModalDialog(FString Title, TSubclassOf
         Modal->Instigator  = Instigator;
         FSlateApplication::Get().AddModalWindow(ModalWindow, nullptr, false);
     }
+}
+
+bool UConsoleCommandsFunctionLibrary::OpenSelectFileDialog(FString DialogTitle, FString DefaultPath, FString DefaultFile, FString FileTypes, bool Multiple, TArray<FString>& SelectedFilesPath) {
+    uint32 Flags = Multiple ? EFileDialogFlags::Multiple : EFileDialogFlags::None;
+    if (IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get()) {
+        return DesktopPlatform->OpenFileDialog(nullptr, DialogTitle, DefaultPath, DefaultFile, FileTypes, Flags, SelectedFilesPath);
+    }
+    return false;
+}
+
+bool UConsoleCommandsFunctionLibrary::OpenSaveFileDialog(FString DialogTitle, FString DefaultPath, FString DefaultFile, FString FileTypes, FString& SelectedFilePath) {
+    TArray<FString> OutFilenames;
+    uint32 Flags = EFileDialogFlags::None;
+    if (IDesktopPlatform* DesktopPlatform = FDesktopPlatformModule::Get()) {
+        bool bOpened = DesktopPlatform->SaveFileDialog(nullptr, DialogTitle, DefaultPath, DefaultFile, FileTypes, Flags, OutFilenames);
+        if (bOpened && OutFilenames.Num() > 0) {
+            SelectedFilePath = OutFilenames[0];
+            return true;
+        }
+    }
+    return false;
 }

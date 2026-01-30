@@ -28,6 +28,7 @@ public class ConsoleCommands : ModuleRules
 				"Core",
 				"UMG",
 				"Blutility",
+				"DesktopPlatform",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
