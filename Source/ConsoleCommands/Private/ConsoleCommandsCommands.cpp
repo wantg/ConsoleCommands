@@ -6,7 +6,7 @@
 
 void FConsoleCommandsCommands::RegisterCommands()
 {
-	UI_COMMAND(OpenPluginWindow, "ConsoleCommands", "Bring up ConsoleCommands window", EUserInterfaceActionType::Button, FInputChord());
+	UI_COMMAND(PluginAction, "ConsoleCommands", "Execute ConsoleCommands action", EUserInterfaceActionType::Button, FInputChord());
 }
 
 #undef LOCTEXT_NAMESPACE

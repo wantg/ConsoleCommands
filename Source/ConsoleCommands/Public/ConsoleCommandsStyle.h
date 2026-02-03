@@ -4,7 +4,6 @@
 
 #include "Styling/SlateStyle.h"
 
-/**  */
 class FConsoleCommandsStyle
 {
 public:
