@@ -17,4 +17,7 @@ class UConsoleCommandsFunctionLibrary : public UBlueprintFunctionLibrary {
 
     UFUNCTION(BlueprintCallable, Category = "ConsoleCommands")
     static bool OpenSaveFileDialog(FString DialogTitle, FString DefaultPath, FString DefaultFile, FString FileTypes, FString& SelectedFilePath);
+
+    UFUNCTION(BlueprintPure, Category = "ConsoleCommands")
+    static FString GetDefaultConfig() { return "{\"commands\":[{\"enabled\":true,\"command\":\"stat fps\"}, {\"enabled\":true,\"command\":\"show collision\"}]}"; }
 };
